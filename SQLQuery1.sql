@@ -123,6 +123,31 @@ INSERT INTO auto (regNumber, markID, varv, v_aasta, kaigukastID, km) VALUES ('28
  ('281FAS', 2, 'Blue', 2001, 2, 1200.50),
  ('252FDS', 3, 'Black', 2010, 1, 876.25)
 
+ -- ülessane number 3
+
+ SELECT 
+    t.tootajaNimi,
+    a.regNumber,
+    a.varv,
+    a.v_aasta,
+    r.rendiAlgus,
+    r.rendiLopp,
+    r.hindKokku
+FROM 
+    rendileping r
+INNER JOIN 
+    auto a ON r.regNumber = a.regNumber
+INNER JOIN 
+    tootaja t ON r.tootajaID = t.tootajaID;
+
+
+-- ulessane number 4
+
+SELECT 
+    COUNT(*) AS summaarne_autode_arv,
+    SUM(hindKokku) AS summaarne_maksumus
+FROM 
+    rendileping;
 
 
  select * from auto, mark, kaigukast
@@ -135,7 +160,6 @@ INNER JOIN kaigukast ON kaigukast.kaigukastID=auto.kaigukastID
 
 
 -- loo protseduur "InsertRendileping"
-
 
 
 CREATE PROCEDURE InsertRendileping
